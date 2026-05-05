@@ -323,3 +323,112 @@ CREATE TABLE IF NOT EXISTS `noticeboard` (
   `create_timestamp` int(11) NOT NULL,
   PRIMARY KEY (`notice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- Missing tables for Property Management System
+-- Reconstructed from application models and controllers
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `level` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `admin` (`admin_id`, `name`, `email`, `password`, `level`) VALUES
+(1, 'Admin', 'admin@admin.com', 'admin', 1);
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `settings_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`settings_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `settings` (`type`, `description`) VALUES
+('system_name', 'Property Management System'),
+('system_title', 'PMS'),
+('address', '123 Main St'),
+('phone', '555-555-5555'),
+('paypal_email', 'paypal@example.com'),
+('currency', 'USD'),
+('system_email', 'admin@admin.com'),
+('buyer', 'Client Name'),
+('purchase_code', 'xxxx-xxxx-xxxx-xxxx'),
+('language', 'english'),
+('text_align', 'left-to-right');
+
+CREATE TABLE IF NOT EXISTS `journal` (
+  `journal_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proj_id` varchar(255) DEFAULT 'PMS',
+  `jv_no` bigint(20) NOT NULL,
+  `jv_date` int(11) NOT NULL,
+  `ledger_id` bigint(20) NOT NULL,
+  `narration` text,
+  `dr_amt` decimal(15,2) DEFAULT '0.00',
+  `cr_amt` decimal(15,2) DEFAULT '0.00',
+  `tr_from` varchar(255) DEFAULT NULL,
+  `tr_no` bigint(20) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `cc_code` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`journal_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `journal_info` (
+  `journal_info_id` int(11) NOT NULL AUTO_INCREMENT,
+  `journal_info_no` bigint(20) NOT NULL,
+  `journal_info_date` int(11) NOT NULL,
+  `proj_id` varchar(255) DEFAULT 'PMS',
+  `narration` text,
+  `ledger_id` bigint(20) NOT NULL,
+  `dr_amt` decimal(15,2) DEFAULT '0.00',
+  `cr_amt` decimal(15,2) DEFAULT '0.00',
+  `type` varchar(50) DEFAULT NULL,
+  `cur_bal` decimal(15,2) DEFAULT '0.00',
+  `received_from` varchar(255) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `cc_code` int(11) DEFAULT NULL,
+  PRIMARY KEY (`journal_info_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `receipt` (
+  `receipt_id` int(11) NOT NULL AUTO_INCREMENT,
+  `receipt_no` bigint(20) NOT NULL,
+  `receipt_date` int(11) NOT NULL,
+  `proj_id` varchar(255) DEFAULT 'PMS',
+  `narration` text,
+  `ledger_id` bigint(20) NOT NULL,
+  `dr_amt` decimal(15,2) DEFAULT '0.00',
+  `cr_amt` decimal(15,2) DEFAULT '0.00',
+  `type` varchar(50) DEFAULT NULL,
+  `cur_bal` decimal(15,2) DEFAULT '0.00',
+  `received_from` varchar(255) DEFAULT NULL,
+  `cheq_no` varchar(255) DEFAULT NULL,
+  `cheq_date` int(11) DEFAULT NULL,
+  `bank` varchar(255) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `cc_code` int(11) DEFAULT NULL,
+  PRIMARY KEY (`receipt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `language` (
+  `phrase_id` int(11) NOT NULL AUTO_INCREMENT,
+  `phrase` text NOT NULL,
+  `english` text NOT NULL,
+  PRIMARY KEY (`phrase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ledger_group` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(255) NOT NULL,
+  `proj_id` varchar(255) DEFAULT 'PMS',
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `ledger_group` (`group_id`, `group_name`) VALUES
+(1, 'Assets'),
+(2, 'Liabilities'),
+(3, 'Equity'),
+(4, 'Revenue'),
+(5, 'Expenses');
