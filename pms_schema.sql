@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `noticeboard` (
   `create_timestamp` int(11) NOT NULL,
   PRIMARY KEY (`notice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-<<<<<<< HEAD
+
 -- Missing tables for Property Management System
 -- Reconstructed from application models and controllers
 
@@ -413,13 +413,6 @@ CREATE TABLE IF NOT EXISTS `receipt` (
   PRIMARY KEY (`receipt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `language` (
-  `phrase_id` int(11) NOT NULL AUTO_INCREMENT,
-  `phrase` text NOT NULL,
-  `english` text NOT NULL,
-  PRIMARY KEY (`phrase_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE IF NOT EXISTS `ledger_group` (
   `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(255) NOT NULL,
@@ -433,65 +426,31 @@ INSERT INTO `ledger_group` (`group_id`, `group_name`) VALUES
 (3, 'Equity'),
 (4, 'Revenue'),
 (5, 'Expenses');
-=======
--- Missing tables for the Property Management System
 
--- Language table
 CREATE TABLE IF NOT EXISTS `language` (
   `phrase_id` int(11) NOT NULL AUTO_INCREMENT,
-  `phrase` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `english` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `phrase` text NOT NULL,
+  `english` text NOT NULL,
   PRIMARY KEY (`phrase_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Settings table
-CREATE TABLE IF NOT EXISTS `settings` (
-  `settings_id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`settings_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Admin table
-CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `email` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `password` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `level` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Initial data for settings
-INSERT INTO `settings` (`type`, `description`) VALUES ('system_name', 'Property Management System');
-INSERT INTO `settings` (`type`, `description`) VALUES ('system_title', 'PMS Admin');
-INSERT INTO `settings` (`type`, `description`) VALUES ('system_email', 'admin@example.com');
-INSERT INTO `settings` (`type`, `description`) VALUES ('address', '123 Main St, City, Country');
-INSERT INTO `settings` (`type`, `description`) VALUES ('phone', '555-0199');
-INSERT INTO `settings` (`type`, `description`) VALUES ('paypal_email', 'paypal@example.com');
-INSERT INTO `settings` (`type`, `description`) VALUES ('currency', 'USD');
-
--- Initial data for admin
-INSERT INTO `admin` (`name`, `email`, `password`, `level`) VALUES ('Admin User', 'admin@example.com', 'admin', 1);
-
--- Initial data for language
-INSERT INTO `language` (`phrase`, `english`) VALUES ('admin_dashboard', 'Admin Dashboard');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('login', 'Login');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('settings', 'Settings');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('system_settings', 'System Settings');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('manage_language', 'Manage Language');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('dashboard', 'Dashboard');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('manage_landlord', 'Manage Landlord');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('manage_property', 'Manage Property');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('manage_unit', 'Manage Unit');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('rental_application', 'Rental Application');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('rental_application_list', 'Rental Application List');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('manage_lease', 'Manage Lease');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('tenant_list', 'Tenant List');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('work_order', 'Work Order');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('maintenance_log', 'Maintenance Log');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('active_lease', 'Active Lease');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('settings_updated', 'Settings Updated');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('login_failed', 'Login Failed');
-INSERT INTO `language` (`phrase`, `english`) VALUES ('logged_out', 'Logged Out');
->>>>>>> 5d8275a1c5e9af6ab2a93cc9a1a32a0bd6cc4a17
+INSERT INTO `language` (`phrase`, `english`) VALUES
+('admin_dashboard', 'Admin Dashboard'),
+('login', 'Login'),
+('settings', 'Settings'),
+('system_settings', 'System Settings'),
+('manage_language', 'Manage Language'),
+('dashboard', 'Dashboard'),
+('manage_landlord', 'Manage Landlord'),
+('manage_property', 'Manage Property'),
+('manage_unit', 'Manage Unit'),
+('rental_application', 'Rental Application'),
+('rental_application_list', 'Rental Application List'),
+('manage_lease', 'Manage Lease'),
+('tenant_list', 'Tenant List'),
+('work_order', 'Work Order'),
+('maintenance_log', 'Maintenance Log'),
+('active_lease', 'Active Lease'),
+('settings_updated', 'Settings Updated'),
+('login_failed', 'Login Failed'),
+('logged_out', 'Logged Out');

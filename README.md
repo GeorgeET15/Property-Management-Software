@@ -1,56 +1,68 @@
-# Property Management System (PMS)
+# CodeIgniter 4 Application Starter
 
-This repository contains a legacy Property Management System built using CodeIgniter 2.x and PHP 5.6. The codebase has been fully containerized with Docker to ensure smooth local development and deployment on modern machines (including Apple Silicon Macs).
+## What is CodeIgniter?
 
-## Features
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](https://codeigniter.com).
 
-- **Dashboard**: High-level overview of properties, active projects, and vacant units.
-- **Property & Unit Management**: Add and manage various properties (Apartments, Commercial, Single Family, etc.) and individual units.
-- **Lease & Tenant Management**: Handle rental applications, track active leases, move-in/move-out dates, and rent amounts.
-- **Work Orders**: Create and track work orders and maintenance logs for specific properties.
-- **Accounting**: Track ledgers and payments.
-- **Reporting**: Generate graphical and cash flow reports.
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
-*(Note: This application was built by repurposing a Hospital Management System template. All legacy hospital code and database tables have been stripped out to provide a clean PMS experience).*
+More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
 
-## Prerequisites
+You can read the [user guide](https://codeigniter.com/user_guide/)
+corresponding to the latest version of the framework.
 
-To run this application locally, you only need to have Docker installed:
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+## Installation & updates
 
-## Running the Application Locally
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
 
-The entire application environment (PHP 5.6, Apache, MySQL 5.7) is containerized and pre-configured.
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
 
-1. **Start the environment**:
-   Open your terminal, navigate to the root directory of this project, and run:
-   ```bash
-   docker compose up -d --build
-   ```
+## Setup
 
-2. **Access the application**:
-   Once the containers are running, the application will be available at:
-   [http://localhost:8080](http://localhost:8080)
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
 
-3. **Log in**:
-   The database schema is automatically initialized and seeded with a default administrator account. You can log in using:
-   - **Account Type**: Admin
-   - **Email**: `admin@admin.com`
-   - **Password**: `admin`
+## Important Change with index.php
 
-## Database & Fake Data
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
 
-The repository includes a `pms_schema.sql` file which contains the full database structure for the Property Management System. 
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
 
-During the initial `docker compose up`, this schema is automatically injected into the MySQL container. The database has also been populated with hundreds of rows of fake data (landlords, properties, tenants, work orders, etc.) for demonstration and testing purposes.
+**Please** read the user guide for a better explanation of how CI4 works!
 
-## Stopping the Application
+## Repository Management
 
-To stop the Docker containers when you are finished, run:
-```bash
-docker compose down
-```
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
 
-## Known Issues
-- **Missing Module**: The "Accounts Module -> Cash Book" link in the sidebar was tied to an external module (`accounting/scb_mod/`) that was not included in the original source code. This navigation link has been temporarily disabled.
-- **Legacy Framework**: The application runs on CodeIgniter 2.x and PHP 5.6, meaning it relies on older, deprecated PHP methods (like `mysql_*` functions). The Docker environment isolates this, but caution is advised if deploying to a production server without migrating to `mysqli` or `PDO` first.
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
+
+## Server Requirements
+
+PHP version 8.1 or higher is required, with the following extensions installed:
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+
+> [!WARNING]
+> The end of life date for PHP 7.4 was November 28, 2022.
+> The end of life date for PHP 8.0 was November 26, 2023.
+> If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
+> The end of life date for PHP 8.1 will be November 25, 2024.
+
+Additionally, make sure that the following extensions are enabled in your PHP:
+
+- json (enabled by default - don't turn it off)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
